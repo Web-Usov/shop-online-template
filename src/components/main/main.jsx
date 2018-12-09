@@ -11,7 +11,7 @@ class main extends Component {
     }
   }
   componentDidMount(){
-    axios.get(SERVER+'/api')
+    axios.get(SERVER+'/api/categories')
       .then(res => {
         const data = {res}
         alert(JSON.stringify(data))
