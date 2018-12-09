@@ -1,9 +1,18 @@
 import React, { Component } from 'react'
-import {Sidebar} from 'components'
+import {Sidebar,Breakpoints, Banner,ShopList,MainFooter} from 'components'
 import axios from 'axios'
 import {SERVER} from 'config'
+import {Grid} from '@material-ui/core'
+import {withStyles} from '@material-ui/core/styles'
 
-class main extends Component {
+const styles = theme => ({
+  root:{
+    border:"1px solid #000",
+  }
+})
+
+
+class Main extends Component {
   constructor(props){
     super(props)
     this.state={
@@ -11,19 +20,28 @@ class main extends Component {
     }
   }
   componentDidMount(){
-    axios.get(SERVER+'/api/categories')
-      .then(res => {
-        const data = {res}
-        alert(JSON.stringify(data))
-        
-      }).catch(error => alert(error))
+    // axios.get(SERVER+'/api/categories')
+    //   .then(res => res.json())
+    //   .then(data => alert(data))
+    //   .catch(error => alert("ERROR: "+error));
   }
   render() {
+    const {classes} = this.props;
     return (
-      <section>
-        <Sidebar/>
+      <section className={classes.root}>
+        <Breakpoints/>
+        <Grid container >
+          <Grid item sm={4} md={3} xs={12}>
+            <Sidebar/>
+          </Grid>
+          <Grid item sm={8} md={9} xs={12}>
+            <Banner/>
+            <ShopList/>
+          </Grid>
+        </Grid>
+        <MainFooter/>
       </section>
     )
   }
 }
-export default (main);
+export default withStyles(styles)(Main)

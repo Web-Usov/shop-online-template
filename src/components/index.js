@@ -3,11 +3,19 @@ import Header from './header'
 import Footer from './footer'
 import Sidebar from './sidebar'
 import Main from './main'
+import MainFooter from './mainFooter'
+import Banner from './banner'
+import Breakpoints from './breakpoints'
+import ShopList from './list'
 
 export {
     App,
     Header,
     Footer,
     Sidebar,
-    Main
+    Main,
+    MainFooter,
+    Banner,
+    Breakpoints,
+    ShopList
 }

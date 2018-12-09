@@ -5,19 +5,20 @@ import {withStyles} from '@material-ui/core/styles'
 const styles = theme => ({
   root:{
     border:"1px solid #000",
-    minHeight:"100px"
+    marginTop:15,
+    marginBottom:15,
   }
 })
 
-
-class Footer extends Component {
+class Breakpoints extends Component {
   render() {
     const {classes} = this.props;
     return (
-      <section className={classes.root}>
-        <Typography variant="h5">Footer</Typography>
-      </section>
+      <div className={classes.root}>
+        <Typography variant="h5">Breakpoints</Typography>
+        
+      </div>
     )
   }
 }
-export default withStyles(styles)(Footer)
+export default withStyles(styles)(Breakpoints)

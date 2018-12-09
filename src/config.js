@@ -1,4 +1,4 @@
-const SERVER = 'http://localhost'
+const SERVER = 'http://localhost:1234'
 
 export {
     SERVER

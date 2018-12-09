@@ -31,9 +31,5 @@
     "url": "git+https://github.com/Web-Usov/shop-online-template.git"
   },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Web-Usov/shop-online-template/issues"
-  },
-  "homepage": "https://github.com/Web-Usov/shop-online-template#readme"
+  "license": "ISC"
 }

@@ -7,9 +7,12 @@ import logo from './logo.png'
 const styles = theme => ({
   root: {
     // backgroundColor: 'red',
+    marginTop:10,
+    marginBottom:10,
   },
   top:{
-    display:'flex'
+    display:'flex',
+    marginBottom:15,
   },
   top_rigth_a:{
     padding:'5px 7px',
@@ -17,7 +20,7 @@ const styles = theme => ({
   },  
   main:{
     display:'flex',
-    margin:'30px 0 40px 0'
+    margin:'20px 0'
   },
   logo:{
     marginTop:-5
