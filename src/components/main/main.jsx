@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import {Sidebar,Breakpoints, Banner,ShopList,MainFooter} from 'components'
-import axios from 'axios'
-import {SERVER} from 'config'
 import {Grid} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles'
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux'
+import { categoriesActions } from 'store/actions'
+import { categoriesApi } from 'api'
 
 const styles = theme => ({
   root:{
@@ -11,19 +13,58 @@ const styles = theme => ({
   }
 })
 
-
+const categories = [
+  {
+    name:"Mobile",
+    id:"1",
+    count:10,
+    active:false,
+    categories:[]
+  },
+  {
+    name:"Tablet",
+    id:"2",
+    count:10,
+    active:false,
+    categories:[]
+  },
+  {
+    name:"Audio",
+    id:"3",
+    count:20,
+    active:false,
+    categories:[
+      {
+        name:"MP3",
+        id:"3_1",
+        count:10,
+        active:false,
+        categories:[]
+      },
+      {
+        name:"BIG MUSIC",
+        id:"3_2",
+        count:10,
+        active:false,
+        categories:[]
+      }
+    ]
+  },
+]
+const totalCountItemsOnCat = 40;
 class Main extends Component {
   constructor(props){
     super(props)
     this.state={
-      list:null
     }
   }
-  componentDidMount(){
-    // axios.get(SERVER+'/api/categories')
-    //   .then(res => res.json())
-    //   .then(data => alert(data))
-    //   .catch(error => alert("ERROR: "+error));
+  componentWillMount(){
+    const {setCategories} = this.props    
+    categoriesApi.getCategories((error,data)=>{
+      if(error) return console.log("getCategories-Error: ",error)
+      return console.log("getCategories-Data: ",data)      
+    })
+    // setCategories(categories,totalCountItemsOnCat)
   }
   render() {
     const {classes} = this.props;
@@ -32,7 +73,7 @@ class Main extends Component {
         <Breakpoints/>
         <Grid container >
           <Grid item sm={4} md={3} xs={12}>
-            <Sidebar/>
+            <Sidebar categories={this.props.categories}/>
           </Grid>
           <Grid item sm={8} md={9} xs={12}>
             <Banner/>
@@ -44,4 +85,10 @@ class Main extends Component {
     )
   }
 }
-export default withStyles(styles)(Main)
+const mapStateToProps = state => ({
+	categories: state.categories
+})
+const mapDispatchToProps = dispatch => bindActionCreators(categoriesActions, dispatch)
+
+
+export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(Main))

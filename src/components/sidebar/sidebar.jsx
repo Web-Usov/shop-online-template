@@ -4,9 +4,11 @@ import {withStyles} from '@material-ui/core/styles'
 
 const styles = theme => ({
   root:{
-    border:"1px solid #000",
+    border:"1px solid #e0e0e0",
     minHeight:"100px",
     margin:"0 20px",
+    borderBottomWidth:"5px",
+    marginBottom:15,
   },
   title:{
     backgroundColor:"#e0e0e0",
@@ -33,7 +35,8 @@ const styles = theme => ({
     }
   },
   color_ul:{
-    padding:"0 20px"
+    padding:"0 20px",
+    lineHeight: "10px",
   },
   color_li:{
     padding:0,
@@ -42,7 +45,22 @@ const styles = theme => ({
     width:20,
     height:20,
     cursor:"pointer",
-    position:"relative"
+    position:"relative",
+    '&:hover':{
+      '&:after':{
+        position:'absolute',
+        width:'100%',
+        height:'0',
+        border:"solid 2px #fff",
+        boxShadow: "1px 1px 10px rgba(0,0,0,0.8)",
+        // boxSizing: "unset",
+        content: `""`,
+        top: -4,
+        // left: "40%",
+        zIndex: 10,
+
+      }
+    }
   },
   color_li_active:{
     '&:before':{
@@ -50,8 +68,7 @@ const styles = theme => ({
       width:'100%',
       height:'100%',
       border:"solid 2px #fff",
-      // margin: "0 -2px -2px -2px",
-      boxShadow: "1px 1px 10px rgba(0,0,0,0.5)",
+      boxShadow: "1px 1px 10px rgba(0,0,0,0.3)",
       boxSizing: "unset",
       content: `""`,
       top: -2,
@@ -62,44 +79,7 @@ const styles = theme => ({
   }
 })
 
-let categories = [
-  {
-    name:"Mobile",
-    id:"1",
-    count:10,
-    active:false,
-    categories:[]
-  },
-  {
-    name:"Tablet",
-    id:"2",
-    count:10,
-    active:false,
-    categories:[]
-  },
-  {
-    name:"Audio",
-    id:"3",
-    count:20,
-    active:false,
-    categories:[
-      {
-        name:"MP3",
-        id:"3_1",
-        count:10,
-        active:false,
-        categories:[]
-      },
-      {
-        name:"BIG MUSIC",
-        id:"3_2",
-        count:10,
-        active:false,
-        categories:[]
-      }
-    ]
-  },
-]
+
 let brands = [
   {
     name:"Kanma",
@@ -192,10 +172,12 @@ class Sidebar extends Component {
   constructor(props){
     super(props)
     this.state={
-      categories,
       brands,
       colors
     }
+  }
+  componentWillMount(){
+
   }
   viewCategories = (list) => {
     const {classes} = this.props;
@@ -237,14 +219,14 @@ class Sidebar extends Component {
     </ul>)
   }
   render() {
-    const {classes} = this.props;
+    const {classes, categories} = this.props;
     return (
       <div className={classes.root}>
         <Typography variant="h6" className={classes.title}>Shop By</Typography>
         <Typography variant="overline" className={classes.subtitle}>Categories</Typography>
         <hr className={classes.hr}/>
         <div style={{paddingRight:20, marginBottom:20}}>
-          {this.viewCategories(this.state.categories)}
+          {this.viewCategories(categories.list)}
         </div>
         <Typography variant="overline" className={classes.subtitle}>Price</Typography>
         <hr className={classes.hr}/>

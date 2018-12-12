@@ -11,11 +11,27 @@ const styles = theme => ({
     // border:"1px solid #000",
     borderRadius:"4px",
     marginBottom:15,
+    position:"relative"
+  },
+  titleBox:{
+    position:"absolute",
+    width:"100%",
+    height:"auto",
+    left:"3%",
+    bottom:"5%",
   },
   title:{
     color:"#ffffff",
-    paddingLeft:"3%",
     fontWeight:300,
+    [theme.breakpoints.down('sm')]:{
+      fontSize:35,
+      color:"red"
+    },
+    [theme.breakpoints.down('xs')]:{
+      fontSize:25,
+      color:"blue"
+    },
+    
   }
 })
 
@@ -25,8 +41,10 @@ class Banner extends Component {
     const {classes} = this.props;
     return (
       <div className={classes.root}>
-        <Typography variant="h3" className={classes.title} style={{paddingTop:"10%"}}>Banner</Typography>
-        <Typography variant="h3" className={classes.title}>880 x 208px</Typography>
+        <div className={classes.titleBox}>
+          <Typography variant="h3" className={classes.title}>Banner</Typography>
+          <Typography variant="h3" className={classes.title}>880 x 208px</Typography>
+        </div>
       </div>
     )
   }
