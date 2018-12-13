@@ -58,11 +58,11 @@ class Main extends Component {
     this.state={
     }
   }
-  componentWillMount(){
+  componentDidMount(){
     const {setCategories} = this.props    
     categoriesApi.getCategories((error,data)=>{
-      if(error) return console.log("getCategories-Error: ",error)
-      return console.log("getCategories-Data: ",data)      
+      // if(error) return console.log("getCategories-Error: ",error)
+      // console.log("getCategories-Data: ",data)      
     })
     // setCategories(categories,totalCountItemsOnCat)
   }
