@@ -12,7 +12,8 @@ const styles = theme => ({
   btn:{
     margin:"20px 8px",
     width:"auto",
-    minWidth: "40px"
+    minWidth: "40px",
+    boxShadow:"none",
   }
 })
 

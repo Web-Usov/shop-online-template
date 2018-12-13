@@ -41,6 +41,29 @@ const styles = theme => ({
   money_a:{
     display:"flex",
     alignItems: "center",
+  },
+  info:{
+    display:'flex',
+    alignItems:'center'
+  },
+  label:{
+    flexGrow:1
+  },
+  conf:{
+    display:"flex"
+  },
+  conf_ul:{
+    display:"flex",
+    margin:"0 30px 0 0",
+    padding:0
+  },
+  conf_li:{
+    cursor:"pointer",
+    margin:"0 8px",
+    '&:hover':{
+      fontWeight:500,
+      textDecoration:'underline'
+    }
   }
 })
 
@@ -72,9 +95,25 @@ class Footer extends Component {
               <li><a href="http://rss.com" target="_blank" className={classes.money_a}><img src={hzIcon} alt="" style={{margin:15}}/></a></li>
             </ul>
           </div>
+          <hr/>
+          <div className={classes.info}>
+            <div className={classes.label}>
+              <Typography variant="caption">©2013 SoftMarket Mangento Store by emthemes.com</Typography>
+            </div>
+            <div className={classes.conf}>
+              <ul className={classes.conf_ul}>
+                <li ><Typography variant="caption" className={classes.conf_li}>EN</Typography></li>
+                <li><Typography variant="caption" className={classes.conf_li}>FR</Typography></li>
+                <li><Typography variant="caption" className={classes.conf_li}>ES</Typography></li>
+              </ul>
+              <ul className={classes.conf_ul}>
+                <li><Typography variant="caption" className={classes.conf_li}>$</Typography></li>
+                <li><Typography variant="caption" className={classes.conf_li}>€</Typography></li>
+                <li><Typography variant="caption" className={classes.conf_li}>£</Typography></li>
+              </ul>
+            </div>
+          </div>
         </section>
-
-
       </footer>
       
     )
