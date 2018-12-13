@@ -1,9 +1,9 @@
 import {categoriesConst} from '../consts'
 
-export const setCategories = (list,totalCount) => ({
+export const setCategories = (props) => ({
     type:categoriesConst.SET_LIST,
     payload:{
-        list,
-        totalCount
+        list:props.list,
+        totalCount:props.totalCount
     }
 })

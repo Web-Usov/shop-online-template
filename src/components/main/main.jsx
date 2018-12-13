@@ -4,8 +4,8 @@ import {Grid} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles'
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
-import { categoriesActions } from 'store/actions'
-import { categoriesApi } from 'api'
+import { categoriesActions, productsActions } from 'store/actions'
+import { categoriesApi, productsApi } from 'api'
 
 const styles = theme => ({
   root:{
@@ -13,45 +13,7 @@ const styles = theme => ({
   }
 })
 
-const categories = [
-  {
-    name:"Mobile",
-    id:"1",
-    count:10,
-    active:false,
-    categories:[]
-  },
-  {
-    name:"Tablet",
-    id:"2",
-    count:10,
-    active:false,
-    categories:[]
-  },
-  {
-    name:"Audio",
-    id:"3",
-    count:20,
-    active:false,
-    categories:[
-      {
-        name:"MP3",
-        id:"3_1",
-        count:10,
-        active:false,
-        categories:[]
-      },
-      {
-        name:"BIG MUSIC",
-        id:"3_2",
-        count:10,
-        active:false,
-        categories:[]
-      }
-    ]
-  },
-]
-const totalCountItemsOnCat = 40;
+
 class Main extends Component {
   constructor(props){
     super(props)
@@ -59,25 +21,36 @@ class Main extends Component {
     }
   }
   componentDidMount(){
-    const {setCategories} = this.props    
+    const {setCategories,setProducts} = this.props    
     categoriesApi.getCategories((error,data)=>{
       if(error) return console.error("getCategories-Error: ",error)
       console.log("getCategories-Data: ",data)  
-      setCategories(data,0)    
+      setCategories({
+        list:data,
+        totalCount:0,
+      })    
+    })
+    productsApi.getAllProducts((error,data) => {
+      if(error) return console.error("getAllitems-Error: ", error) 
+      console.log("getAllitems-Data: ",data)  
+      setProducts({
+        list:data,
+        totalCount:0,
+      })         
     })
   }
   render() {
-    const {classes} = this.props;
+    const {classes,products,categories} = this.props;
     return (
       <section className={classes.root}>
         <Breakpoints/>
         <Grid container >
           <Grid item sm={4} md={3} xs={12}>
-            <Sidebar categories={this.props.categories}/>
+            <Sidebar categories={categories}/>
           </Grid>
           <Grid item sm={8} md={9} xs={12}>
             <Banner/>
-            <ShopList/>
+            <ShopList products={products}/>
           </Grid>
         </Grid>
         <MainFooter/>
@@ -86,9 +59,14 @@ class Main extends Component {
   }
 }
 const mapStateToProps = state => ({
-	categories: state.categories
+  categories: state.categories,
+  products: state.products
 })
-const mapDispatchToProps = dispatch => bindActionCreators(categoriesActions, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    ...categoriesActions,
+    ...productsActions
+  },dispatch)
 
 
 export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(Main))

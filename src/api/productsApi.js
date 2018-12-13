@@ -1,8 +1,8 @@
 import {SERVER} from 'config'
 
-export const getCategories = (cb) => { 
+export const getAllProducts = (cb) => { 
 
-  fetch(SERVER+'/api/categories',{
+  fetch(SERVER+'/api/products',{
     method:'get',
     mode:'cors'
   })
