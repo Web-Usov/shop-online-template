@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Typography, TextField, InputAdornment } from '@material-ui/core';
 import {ArrowDropDown, Search} from '@material-ui/icons/';
 import logo from './logo.png'
+import {Link} from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -81,14 +82,14 @@ class header extends Component {
           <Typography variant="caption"  align="right">
             <a href="#"  className={classes.top_rigth_a}>My Account</a>
             <a href="#"   style={{borderRight:"solid 1px #eaeaea", paddingRight:5}}><ArrowDropDown fontSize="small" style={{verticalAlign:"middle"}}/></a>
-            <a href="#"  className={classes.top_rigth_a}>My Cart</a>
+            <Link to="/cart"  className={classes.top_rigth_a}>My Cart</Link>
             <a href="#"   style={{borderRight:"solid 1px #eaeaea", paddingRight:5}}><ArrowDropDown fontSize="small" style={{verticalAlign:"middle"}}/></a>
           </Typography>
 
         </div>
         <div className={classes.main}>
           <div className={classes.logo}>
-            <img src={logo} alt=""/>
+            <Link to="/"><img src={logo} alt=""/></Link>
           </div>
           <nav className={classes.nav}>
             {this.state.nav.map(item => (

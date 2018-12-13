@@ -7,6 +7,7 @@ import MainFooter from './mainFooter'
 import Banner from './banner'
 import Breakpoints from './breakpoints'
 import ShopList from './list'
+import Cart from './cart'
 
 export {
     App,
@@ -17,5 +18,6 @@ export {
     MainFooter,
     Banner,
     Breakpoints,
-    ShopList
+    ShopList,
+    Cart,
 }
