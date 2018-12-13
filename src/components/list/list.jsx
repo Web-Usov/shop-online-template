@@ -40,17 +40,18 @@ class ShopList extends Component {
 	}
 	render() {
 		const { classes,products } = this.props;
-		const { perPage,page } = this.state;
-
+		const { perPage,page,pages } = this.state;
+		const {list} = products
+		const {length} = list;
 		let startIndex, viewCount = 0;
-		if(products.list.length < perPage){
+		if(length < perPage){
 			startIndex = 0
-			viewCount = products.list.length
+			viewCount = length
 		}
 		else {
 			startIndex = page * perPage
-			if(products.list.length - page * perPage <= perPage) {
-				viewCount = products.list.length - page * perPage
+			if(length - page * perPage <= perPage) {
+				viewCount = length - page * perPage
 			}else{				
 				viewCount = perPage
 			}
@@ -60,13 +61,13 @@ class ShopList extends Component {
 				<HeaderList perPage={perPage} changePerPage={this.changePerPage}/>
 				<hr />
 				<Grid container spacing={24}>					
-					{this.viewList(products.list,startIndex,viewCount).map(item => (
-						<Grid item xs={12} sm={6} md={4}> 
-							<Product item={item} key={item.id}/>
+					{this.viewList(list,startIndex,viewCount).map(item => (
+						<Grid item xs={12} sm={6} md={4} key={item.id}> 
+							<Product item={item} />
 						</Grid>
 					))}
 				</Grid>
-				<FooterList page={page} changePage={this.changePage}/>
+				<FooterList page={page} pages={length/perPage} changePage={this.changePage}/>
 			</div>
 		)
 	}
