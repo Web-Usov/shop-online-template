@@ -13,14 +13,14 @@ export const getAllProducts = (cb) => {
 		.catch(error => cb(error))
 }
 
-export const getProductsByCart = (data, cb) => {
+export const getProductsByCategory = (data, cb) => {
 
-	fetch(SERVER + '/api/products/category_id=' + data.id, {
-			method: 'POST',
+	fetch(SERVER + '/api/products/' + data.id, {
+			method: 'GET',
 			mode: 'cors',
 			// body:'article_id='+data.id,
 		})
-		// .then(res => res.json())
+		.then(res => res.json())
 		.then(data => cb(null, data))
 		.catch(error => cb(error))
 }

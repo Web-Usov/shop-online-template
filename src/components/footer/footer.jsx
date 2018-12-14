@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Typography} from '@material-ui/core'
+import {BigBanners} from 'components'
 import {withStyles} from '@material-ui/core/styles'
 import footerImg from './footer.png'
 import facebookIcon from './facebook.png'
@@ -73,6 +74,9 @@ class Footer extends Component {
     const {classes} = this.props;
     return (
       <footer className={classes.root}>
+        <section>
+          <BigBanners/>
+        </section>
         <div style={{backgroundColor:"#f2f6f9"}}>
           <section>
             <img src={footerImg} alt="" style={{width:"100%", height:"auto"}}/>

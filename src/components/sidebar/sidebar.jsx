@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import {Typography, Checkbox} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles'
 import {productsApi} from 'api'
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux'
+import { productsActions } from 'store/actions'
 
 const styles = theme => ({
   root:{
@@ -36,7 +39,7 @@ const styles = theme => ({
     }
   },
   li_a_active:{
-    fontStyle:'bold'
+    fontWeight:'bold'
   },
   color_ul:{
     padding:"0 20px",
@@ -185,10 +188,17 @@ class Sidebar extends Component {
 
   }
   selectCategory = (id) => {
-    productsApi.getProductsByCart(id, (error, data) =>{ 
+    console.log("POP",id);
+    const {setProducts} = this.props
+    productsApi.getProductsByCategory({id}, (error, data) =>{ 
       if(error) return console.error("getProductsByCart-Error: ",error)
       console.log("getProductsByCart-Data: ",data)          
       this.setState({selectedCat:id})
+      setProducts({
+        list:data,
+        totalCount:data.length,
+      })         
+
     })
     
   }
@@ -202,7 +212,7 @@ class Sidebar extends Component {
           <Typography variant="caption" >
             <a 
               onClick={() => this.selectCategory(item.id)} 
-              className={selectedCat === item.id ? classes.li_a+classes.li_a_active : classes.li_a}
+              className={selectedCat === item.id ? classes.li_a+" "+classes.li_a_active : classes.li_a}
               >{item.name} ({item.count})
             </a>
           </Typography>
@@ -267,4 +277,13 @@ class Sidebar extends Component {
 }
 
 
-export default withStyles(styles)(Sidebar)
+const mapStateToProps = state => ({
+  products: state.products
+})
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    ...productsActions
+  },dispatch)
+
+
+export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(Sidebar))

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Sidebar,Breakpoints, Banner,ShopList,MainFooter} from 'components'
+import {Sidebar,Breakpoints, Banner,ShopList} from 'components'
 import {Grid} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles'
 import { connect } from "react-redux";
@@ -35,7 +35,7 @@ class Main extends Component {
       console.log("getAllitems-Data: ",data)  
       setProducts({
         list:data,
-        totalCount:0,
+        totalCount:data.length,
       })         
     })
   }
@@ -53,7 +53,6 @@ class Main extends Component {
             <ShopList products={products}/>
           </Grid>
         </Grid>
-        <MainFooter/>
       </section>
     )
   }
