@@ -4,7 +4,6 @@ import {withStyles} from '@material-ui/core/styles'
 
 const styles = theme => ({
   root:{
-    border:"1px solid #000",
     marginTop:15,
     marginBottom:15,
   }
@@ -12,10 +11,11 @@ const styles = theme => ({
 
 class Breakpoints extends Component {
   render() {
-    const {classes} = this.props;
+    const {classes, title} = this.props;
     return (
       <div className={classes.root}>
-        <Typography variant="h5">Breakpoints</Typography>
+      <Typography variant="caption">Home > {title}</Typography>
+      <Typography variant="h4">{title}</Typography>
         
       </div>
     )

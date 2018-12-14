@@ -9,7 +9,6 @@ import { categoriesApi, productsApi } from 'api'
 
 const styles = theme => ({
   root:{
-    border:"1px solid #000",
   }
 })
 
@@ -43,7 +42,7 @@ class Main extends Component {
     const {classes,products,categories} = this.props;
     return (
       <section className={classes.root}>
-        <Breakpoints/>
+        <Breakpoints title={"ShopingList"}/>
         <Grid container >
           <Grid item sm={4} md={3} xs={12}>
             <Sidebar categories={categories}/>

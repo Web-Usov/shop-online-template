@@ -41,10 +41,10 @@ class Cart extends Component {
     const {classes,cart} = this.props;
     return (
       <section className={classes.root}>
-        <Breakpoints/>
+        <Breakpoints title={"ShopingCart"}/>
         {/* <Typography variant="h1">{cart.totalCount === 0 ? "TUT PUSTO =(" : "TUT ROVNO "+cart.totalCount}</Typography> */}
         <TableCart list={this.state.list}/>
-        <OrderCart/>
+        {/* <OrderCart/> */}
 
       </section>
     )
