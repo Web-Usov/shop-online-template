@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Typography, Checkbox} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles'
+import {productsApi} from 'api'
 
 const styles = theme => ({
   root:{
@@ -33,6 +34,9 @@ const styles = theme => ({
     '&:hover':{
       fontWeight:500
     }
+  },
+  li_a_active:{
+    fontStyle:'bold'
   },
   color_ul:{
     padding:"0 20px",
@@ -173,19 +177,35 @@ class Sidebar extends Component {
     super(props)
     this.state={
       brands,
-      colors
+      colors,
+      selectedCat:-1,
     }
   }
   componentWillMount(){
 
   }
+  selectCategory = (id) => {
+    productsApi.getProductsByCart(id, (error, data) =>{ 
+      if(error) return console.error("getProductsByCart-Error: ",error)
+      console.log("getProductsByCart-Data: ",data)          
+      this.setState({selectedCat:id})
+    })
+    
+  }
   viewCategories = (list) => {
     const {classes} = this.props;
+    const {selectedCat} = this.state;
     
     return (<ul className={classes.ul}>
       {list.map(item => (
         <li key={item.id} className={classes.li}>
-          <Typography variant="caption" ><a href='#' className={classes.li_a}>{item.name} ({item.count})</a></Typography>
+          <Typography variant="caption" >
+            <a 
+              onClick={() => this.selectCategory(item.id)} 
+              className={selectedCat === item.id ? classes.li_a+classes.li_a_active : classes.li_a}
+              >{item.name} ({item.count})
+            </a>
+          </Typography>
           {item.categories.length !== 0 ? this.viewCategories(item.categories) : undefined}
         </li>
       ))}

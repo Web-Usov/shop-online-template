@@ -34,7 +34,6 @@ class ShopList extends Component {
 		for (let i = startIndex; i < startIndex+count; i++) {
 			result.push(list[i])					
 		}
-		console.log(result);
 		
 		return result;
 	}

@@ -4,6 +4,8 @@ import { Typography, TextField, InputAdornment } from '@material-ui/core';
 import {ArrowDropDown, Search} from '@material-ui/icons/';
 import logo from './logo.png'
 import {Link} from 'react-router-dom'
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux'
 
 const styles = theme => ({
   root: {
@@ -72,7 +74,7 @@ class header extends Component {
     }
   }
   render() {
-    const {classes} = this.props
+    const {classes, cart} = this.props
     return (
       <section className={classes.root}>
         <div className={classes.top}>
@@ -82,7 +84,7 @@ class header extends Component {
           <Typography variant="caption"  align="right">
             <a href="#"  className={classes.top_rigth_a}>My Account</a>
             <a href="#"   style={{borderRight:"solid 1px #eaeaea", paddingRight:5}}><ArrowDropDown fontSize="small" style={{verticalAlign:"middle"}}/></a>
-            <Link to="/cart"  className={classes.top_rigth_a}>My Cart</Link>
+            <Link to="/cart"  className={classes.top_rigth_a}>My Cart {cart.totalCount !== 0 ? '('+cart.totalCount+')' : ''}</Link>
             <a href="#"   style={{borderRight:"solid 1px #eaeaea", paddingRight:5}}><ArrowDropDown fontSize="small" style={{verticalAlign:"middle"}}/></a>
           </Typography>
 
@@ -130,4 +132,9 @@ class header extends Component {
     )
   }
 }
-export default withStyles(styles)(header);
+const mapStateToProps = state => ({
+  cart:state.cart
+})
+const mapDispatchToProps = dispatch => ({})
+
+export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(header))

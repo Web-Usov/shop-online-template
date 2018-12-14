@@ -39,7 +39,6 @@ class ListFooter extends Component {
   }
   totalPage = () => {
     const {pages} = this.props
-    console.log(pages)
     const _pages = []
     for (let i = 0; i < pages; i++) {
       _pages.push(i)      
